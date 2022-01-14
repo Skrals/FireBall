@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(TowerBuilder))]
 public class Tower : MonoBehaviour
 {
     private TowerBuilder _towerBuilder;
     private List<Block> _blocks;
+
+    public event UnityAction<int> SizeUpdated;
 
     private void Start()
     {
@@ -17,6 +20,7 @@ public class Tower : MonoBehaviour
         {
             block.BulletHit += OnBulletHit;
         }
+        SizeUpdated?.Invoke(_blocks.Count);
     }
     
     private void OnBulletHit (Block block)
@@ -29,5 +33,7 @@ public class Tower : MonoBehaviour
         {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y - 0.1f, block.transform.position.z);
         }
+
+        SizeUpdated?.Invoke(_blocks.Count);
     }
 }

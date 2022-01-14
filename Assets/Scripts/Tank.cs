@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Tank : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet _bulletTemplate;
     [SerializeField] private float _delayBetweenShoots;
+    [SerializeField] private float _recoilDistance;
+    [SerializeField] private float _animationRecoilSpeed;
 
     private float _timeAfterShoot;
 
@@ -19,6 +22,7 @@ public class Tank : MonoBehaviour
             if(_timeAfterShoot > _delayBetweenShoots)
             {
                 Shoot();
+                transform.DOMoveX(transform.position.x - _recoilDistance, _delayBetweenShoots / _animationRecoilSpeed).SetLoops(2, LoopType.Yoyo);
                 _timeAfterShoot = 0;
             }
         }
