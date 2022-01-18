@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] private float _towerSize;
+    [SerializeField] private int _towerSize;
     [SerializeField] private Transform _buildPoint;
     [SerializeField] private Block _block;
+    [SerializeField] private LevelIncreaser _levelIncreaser;
     [SerializeField] private Color[] _colors;
     private float div = 20; // коррекция спауна по размеру модели
 
@@ -14,9 +15,10 @@ public class TowerBuilder : MonoBehaviour
 
     public List<Block> Build()
     {
+        int towerSize = _towerSize + (_towerSize / 3 * _levelIncreaser._currLevel);
         _blocks = new List<Block>();
         Transform currentPoint = _buildPoint;
-        for (int i = 0; i < _towerSize; i++)
+        for (int i = 0; i < towerSize; i++)
         {
             Block newBlock = BuildBlock(currentPoint);
             newBlock.SetColor(_colors[Random.Range(0, _colors.Length)]);

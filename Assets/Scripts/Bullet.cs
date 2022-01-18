@@ -31,6 +31,12 @@ public class Bullet : MonoBehaviour
         {
             Bounce();
         }
+        if(other.TryGetComponent(out DeathZone deathZone))
+        {
+            deathZone.ExplosionAnimation();
+            deathZone.DeathCounter();
+            Destroy(gameObject);
+        }
     }
 
     private void Bounce()
