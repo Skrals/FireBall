@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionEffect: {fileID: 7286561120396466261, guid: eb1ec44130ed7c844a72e13430118a9f, type: 3}
+  _tower: {fileID: 1497173391}
   _tank: {fileID: 1768632664}
   _gameOverScreen: {fileID: 647452402}
   _lifes: 3
@@ -1994,6 +1995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d2302d2ffea7f45b4c842d189aba2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deatZone: {fileID: 426455831}
+  _blockStrikeToRegen: 15
+  _currentBlockStrike: 0
 --- !u!114 &1497173392
 MonoBehaviour:
   m_ObjectHideFlags: 0

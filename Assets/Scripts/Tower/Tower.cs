@@ -7,7 +7,12 @@ using UnityEngine.Events;
 public class Tower : MonoBehaviour
 {
     private TowerBuilder _towerBuilder;
+    [SerializeField] private DeathZone _deatZone;
+
     private List<Block> _blocks;
+
+    [SerializeField] private int _blockStrikeToRegen;
+    [SerializeField] private int _currentBlockStrike;
 
     public event UnityAction<int> SizeUpdated;
 
@@ -30,6 +35,9 @@ public class Tower : MonoBehaviour
 
         _blocks.Remove(block);
 
+        _currentBlockStrike += 1;
+        LifeRegen(_currentBlockStrike);
+
         foreach (var item in _blocks)
         {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y - 0.1f, block.transform.position.z);
@@ -40,5 +48,19 @@ public class Tower : MonoBehaviour
         {
             Start();
         }
+    }
+
+    public void LifeRegen(int streak)
+    {
+        if(streak>=_blockStrikeToRegen)
+        {
+            _deatZone._lifes += 1;
+            _currentBlockStrike = 0;
+        }
+        else if (streak <=0)
+        {
+            _currentBlockStrike = 0;
+        }
+        
     }
 }

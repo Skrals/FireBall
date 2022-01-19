@@ -5,11 +5,11 @@ using UnityEngine.Events;
 public class DeathZone : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _explosionEffect;
-
+    [SerializeField] private Tower _tower;
     [SerializeField] private Tank _tank;
     [SerializeField] private GameOverScreen _gameOverScreen;
 
-    [SerializeField] private int _lifes;
+    public int _lifes;
 
     public event UnityAction<int> LifeUpdater;
 
@@ -26,6 +26,7 @@ public class DeathZone : MonoBehaviour
     public void DeathCounter ()
     {
         _lifes -= 1;
+        _tower.LifeRegen(-1);
         if (_lifes <= 0)
         {
             _lifes = 0;
@@ -43,4 +44,5 @@ public class DeathZone : MonoBehaviour
         _gameOverScreen.gameObject.SetActive(true);
         _tank.enabled = false;
     }
+
 }
