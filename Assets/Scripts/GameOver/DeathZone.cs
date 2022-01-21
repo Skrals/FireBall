@@ -15,7 +15,7 @@ public class DeathZone : MonoBehaviour
 
     private void Start()
     {
-        LifeUpdater?.Invoke(_lifes);
+        LifeUpdaterMethod();
     }
 
     public void ExplosionAnimation()
@@ -26,17 +26,25 @@ public class DeathZone : MonoBehaviour
     public void DeathCounter ()
     {
         _lifes -= 1;
+
         _tower.LifeRegen(-1);
+
         if (_lifes <= 0)
         {
             _lifes = 0;
+
             GameOver();
-            LifeUpdater?.Invoke(_lifes);
+            LifeUpdaterMethod();
         }
         else
         {
-            LifeUpdater?.Invoke(_lifes);
+            LifeUpdaterMethod();
         }
+    }
+
+    public void LifeUpdaterMethod()
+    {
+        LifeUpdater?.Invoke(_lifes);
     }
 
     private void GameOver ()

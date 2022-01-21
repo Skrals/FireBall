@@ -36,12 +36,14 @@ public class Tower : MonoBehaviour
         _blocks.Remove(block);
 
         _currentBlockStrike += 1;
+
         LifeRegen(_currentBlockStrike);
 
         foreach (var item in _blocks)
         {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y - 0.1f, block.transform.position.z);
         }
+
         SizeUpdated?.Invoke(_blocks.Count);
 
         if (_blocks.Count <= 0)
@@ -56,6 +58,8 @@ public class Tower : MonoBehaviour
         {
             _deatZone._lifes += 1;
             _currentBlockStrike = 0;
+            _deatZone.LifeUpdaterMethod();
+            _blockStrikeToRegen += _blocks.Count / 4;
         }
         else if (streak <=0)
         {
