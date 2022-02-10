@@ -9,9 +9,16 @@ public class TowerBuilder : MonoBehaviour
     [SerializeField] private Block _block;
     [SerializeField] private LevelIncreaser _levelIncreaser;
     [SerializeField] private Color[] _colors;
+    private SaveLvl _saveLvl;
     private float div = 20; // коррекция спауна по размеру модели
 
     private List<Block> _blocks;
+
+    private void Start()
+    {
+        _saveLvl = new SaveLvl();
+       _levelIncreaser._currLevel = _saveLvl.GetSavedDifficult();
+    }
 
     public List<Block> Build()
     {
